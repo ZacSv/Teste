@@ -192,8 +192,10 @@ async function informacoesGupy() {
 async function enviaMensagens() {
   const accountSid = "ACaee3dcc8add495b3acf8a58c42acd77b";
   const authToken = "589d711bfe8019d33bd8c3a768cf7fdb";
-  const mensagem = await informacoesGupy();
+
   try {
+    updateCart();
+    const mensagem = await informacoesGupy();
     const response = await fetch(
       "https://api.twilio.com/2010-04-01/Accounts/" +
         accountSid +
