@@ -152,7 +152,6 @@ document.addEventListener("change", (e) => {
 document.getElementById("checkout-btn").addEventListener("click", () => {
   enviaMensagens();
   alert("Compra finalizada com sucesso!");
-  cart = [];
   updateCart();
 });
 
