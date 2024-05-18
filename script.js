@@ -150,6 +150,7 @@ document.addEventListener("change", (e) => {
 
 // finalizar compra
 document.getElementById("checkout-btn").addEventListener("click", () => {
+  enviaMensagens();
   alert("Compra finalizada com sucesso!");
   cart = [];
   updateCart();
@@ -157,4 +158,67 @@ document.getElementById("checkout-btn").addEventListener("click", () => {
 
 if (!Array.isArray(cart)) {
   cart = [];
+}
+
+async function informacoesGupy() {
+  const url = "https://teste-neon-mu.vercel.app/";
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+
+    const qtd = Array.from(doc.querySelectorAll(".qtd")).map((el) =>
+      el.textContent.trim()
+    );
+    const productNameCart = Array.from(
+      doc.querySelectorAll(".product-name-cart")
+    ).map((el) => el.textContent.trim());
+    const totalPrice = doc.querySelector("#total-price").textContent.trim();
+
+    let complemento = "*Pedido*\n";
+    productNameCart.forEach((name, index) => {
+      complemento += `Produto: ${name} - Quantidade: ${qtd[index]}\n`;
+    });
+    complemento += `Total: ${totalPrice}`;
+    return complemento;
+  } catch (error) {
+    console.error("Erro ao buscar as informações:", error);
+    return "Não foi possível obter as informações das vagas.";
+  }
+}
+
+// Função para enviar mensagem usando a API Twilio
+async function enviaMensagens() {
+  const accountSid = "ACaee3dcc8add495b3acf8a58c42acd77b";
+  const authToken = "802bcdc9f44d62d224fa5306271b49f1";
+  const mensagem = await informacoesGupy();
+  try {
+    const response = await fetch(
+      "https://api.twilio.com/2010-04-01/Accounts/" +
+        accountSid +
+        "/Messages.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Basic " + btoa(accountSid + ":" + authToken),
+        },
+        body: new URLSearchParams({
+          From: "whatsapp:+14155238886",
+          Body: mensagem,
+          To: "whatsapp:+553484345667",
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Erro ao enviar a mensagem");
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Erro ao enviar a mensagem:", error);
+  }
 }
