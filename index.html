@@ -1,0 +1,36 @@
+<!-- Index.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Loja Virtual</h1>
+    </header>
+    <main>
+        <section id="products">
+            <h2>Produtos</h2>
+            <ul id="product-list">
+                <!-- produtos serão renderizados aqui -->
+            </ul>
+        </section>
+        <aside id="cart">
+            <h3>Carrinho</h3>
+            <ul id="cart-list"></ul>
+        </aside>
+        <section id="finish">
+            <h2>Finalizar Compra</h2>
+            <ul id="finish-buy">
+                <!-- produtos do carrinho serão renderizados aqui -->
+            </ul>
+            <p id="total-price">Total do Pedido: R$ 0,00</p>
+            <button id="checkout-btn">Enviar Pedido</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
