@@ -171,7 +171,7 @@ async function informacoesGupy() {
       el.textContent.trim()
     );
     const productNameCart = Array.from(
-      doc.querySelectorAll(".product-name-cart")
+      document.querySelectorAll(".product-name-cart")
     ).map((el) => el.textContent.trim());
     const totalPrice = document
       .querySelector("#total-price")
