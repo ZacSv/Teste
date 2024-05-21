@@ -192,7 +192,7 @@ async function informacoesGupy() {
 // Função para enviar mensagem usando a API Twilio
 async function enviaMensagens() {
   const accountSid = "ACaee3dcc8add495b3acf8a58c42acd77b";
-  const authToken = "589d711bfe8019d33bd8c3a768cf7fdb";
+  const authToken = "c63344e26aea40a4d3a3f2c396fc3b8f";
 
   try {
     updateCart();
