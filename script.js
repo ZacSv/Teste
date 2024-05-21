@@ -167,13 +167,15 @@ async function informacoesGupy() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, "text/html");
 
-    const qtd = Array.from(doc.querySelectorAll(".qtd")).map((el) =>
+    const qtd = Array.from(document.querySelectorAll(".qtd")).map((el) =>
       el.textContent.trim()
     );
     const productNameCart = Array.from(
       doc.querySelectorAll(".product-name-cart")
     ).map((el) => el.textContent.trim());
-    const totalPrice = doc.querySelector("#total-price").textContent.trim();
+    const totalPrice = document
+      .querySelector("#total-price")
+      .textContent.trim();
 
     let complemento = "*Pedido*\n";
     productNameCart.forEach((name, index) => {
